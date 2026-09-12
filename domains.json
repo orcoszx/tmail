@@ -1,0 +1,4 @@
+[
+    { "name": "nama-domain", "zone": "zoneId_dari_cloudflare", "status": "ONLINE" },
+    { "name": "nama-domain", "zone": "zoneId_dari_cloudflare", "status": "OFFLINE" }
+]
