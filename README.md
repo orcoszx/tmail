@@ -11,7 +11,7 @@
 
 <br>
 
-Bot Telegram untuk membuat alamat email sementara (*temp mail*) secara instan dengan masa aktif 2 jam. Terintegrasi langsung dengan **Cloudflare Email Routing** dan **Cloudflare Workers**. Sangat cocok digunakan untuk mendaftar akun sosial media, verifikasi game, bypass OTP, atau sekadar mengurangi spam ke email pribadi Anda.
+Bot Telegram untuk membuat alamat email sementara (*temp mail*) secara instan dengan masa aktif 2 jam. Terintegrasi langsung dengan **Cloudflare Email Routing** dan **Cloudflare Workers**. Sangat cocok digunakan untuk mendaftar akun sosial media, verifikasi game, bypass OTP, atau sekadar mengurangi spam ke email pribadi kamu.
 
 ## 📑 Daftar Isi
 - [Fitur Utama](#-fitur-utama)
@@ -30,7 +30,7 @@ Bot Telegram untuk membuat alamat email sementara (*temp mail*) secara instan de
 - ⚡ **Instan & Acak**: Buat alamat email acak secara otomatis hanya dengan satu kali klik.
 - 🗑️ **Auto-Delete 2 Jam**: Bot otomatis menghapus *routing rules* di Cloudflare setelah 2 jam (menghindari penumpukan limit rules).
 - 🌐 **Multi-Domain**: Mendukung banyak domain sekaligus dalam satu bot.
-- 🚀 **Pesan Real-time**: Email masuk langsung diteruskan ke chat Telegram Anda dalam hitungan detik.
+- 🚀 **Pesan Real-time**: Email masuk langsung diteruskan ke chat Telegram kamu dalam hitungan detik.
 - 💅 **Tampilan Premium**: Format pesan masuk sudah melalui proses *HTML parsing* sehingga rapi dan mudah dibaca (mendukung HTML/Base64/Quoted-Printable).
 - 🔋 **Keep-Alive Server**: Dilengkapi server *Express.js* bawaan agar bot mudah di-hosting dan tetap hidup 24/7 di platform seperti Koyeb, Render, VPS, dll.
 
@@ -49,7 +49,7 @@ Proyek ini dibangun menggunakan teknologi berikut:
 ## 📂 Struktur Folder
 ```text
 temailbot/
-├── .env.template     # Template file environment (rahasia)
+├── .env.example      # Template file environment (rahasia)
 ├── bot.js            # Script utama bot Telegram
 ├── domains.json      # Konfigurasi daftar domain & Zone ID
 ├── worker.js         # Script Cloudflare Workers (penerima email)
@@ -60,7 +60,7 @@ temailbot/
 ---
 
 ## 🛠️ Persyaratan (*Prerequisites*)
-Sebelum memulai instalasi, pastikan Anda telah menyiapkan:
+Sebelum memulai instalasi, pastikan kamu telah menyiapkan:
 1. **Node.js** (versi 16.x atau lebih baru) terinstal di PC / VPS.
 2. Bot Telegram (Buat melalui [@BotFather](https://t.me/BotFather) dan simpan *Bot Token*-nya).
 3. Akun **Cloudflare** dengan minimal 1 domain yang sudah aktif dan mengarah ke nameserver Cloudflare.
@@ -73,17 +73,17 @@ Sebelum memulai instalasi, pastikan Anda telah menyiapkan:
 ### 1. Clone Repository & Install Dependencies
 Buka terminal/CMD, lalu jalankan perintah berikut:
 ```bash
-git clone [https://github.com/craxid/temailbot.git](https://github.com/craxid/temailbot.git)
+git clone https://github.com/craxid/temailbot.git
 cd temailbot
 npm install
 ```
 
 ### 2. Setup Konfigurasi `.env`
-Keamanan adalah yang utama. Jangan pernah menaruh token langsung di dalam kode. Copy file `.env.template` yang sudah disediakan dan ubah namanya menjadi `.env`:
+Keamanan adalah yang utama. Jangan pernah menaruh token langsung di dalam kode. Copy file `.env.example` yang sudah disediakan dan ubah namanya menjadi `.env`:
 ```bash
-cp .env.template .env
+cp .env.example .env
 ```
-Buka file `.env` tersebut dan isi dengan data rahasia Anda:
+Buka file `.env` tersebut dan isi dengan data rahasia kamu:
 ```env
 PORT=3000
 BOT_TOKEN=ISI_DENGAN_TOKEN_BOT_KAMU
@@ -91,7 +91,7 @@ CF_TOKEN=ISI_DENGAN_API_TOKEN_CLOUDFLARE_KAMU
 ```
 
 ### 3. Setup File `domains.json`
-Edit file `domains.json` dan ganti dengan daftar domain serta *Zone ID* Cloudflare milik Anda. Status bisa diatur ke `"OFFLINE"` jika sedang perbaikan.
+Edit file `domains.json` dan ganti dengan daftar domain serta *Zone ID* Cloudflare milik kamu. Status bisa diatur ke `"OFFLINE"` jika sedang perbaikan.
 ```json
 [
     { "name": "domain-kamu.com", "zone": "ISI_ZONE_ID_CLOUDFLARE_1", "status": "ONLINE" },
@@ -100,20 +100,20 @@ Edit file `domains.json` dan ganti dengan daftar domain serta *Zone ID* Cloudfla
 ```
 
 ### 4. Setup Cloudflare Workers (Penerima Email)
-Bot ini membutuhkan Cloudflare Workers untuk menangkap *raw email* masuk dan mengirimkannya ke Telegram Anda.
+Bot ini membutuhkan Cloudflare Workers untuk menangkap *raw email* masuk dan mengirimkannya ke Telegram kamu.
 1. Buka dashboard Cloudflare, navigasi ke menu **Workers & Pages** > **Create Worker**.
-2. Beri nama worker Anda (misal: `temail`).
+2. Beri nama worker kamu (misal: `temail`).
 3. Copy semua isi file `worker.js` dari repositori ini, lalu *paste* ke dalam code editor Worker.
 4. Masuk ke menu **Settings > Variables & Secrets** di setelan Worker tersebut.
 5. Tambahkan dua variabel rahasia (*Encrypted*):
    - `BOT_TOKEN` : *(Isi dengan token bot Telegram)*
    - `CF_TOKEN` : *(Isi dengan API token Cloudflare)*
-6. Sesuaikan variabel array `zones` di dalam kode `worker.js` dengan kumpulan *Zone ID* Anda, lalu klik **Deploy**.
+6. Sesuaikan variabel array `zones` di dalam kode `worker.js` dengan kumpulan *Zone ID* kamu, lalu klik **Deploy**.
 
-> **⚠️ Penting:** Pastikan fitur **Email Routing** pada tab *Email* di domain Anda sudah diaktifkan di dashboard Cloudflare.
+> **⚠️ Penting:** Pastikan fitur **Email Routing** pada tab *Email* di domain kamu sudah diaktifkan di dashboard Cloudflare.
 
 ### 5. Jalankan Bot!
-Jalankan bot melalui terminal PC atau VPS Anda:
+Jalankan bot melalui terminal PC atau VPS kamu:
 ```bash
 node bot.js
 ```
@@ -122,11 +122,11 @@ node bot.js
 ---
 
 ## 📱 Cara Penggunaan
-1. Buka bot Anda di Telegram.
+1. Buka bot kamu di Telegram.
 2. Ketik perintah `/start`.
 3. Bot akan memunculkan *Inline Keyboard* berisi daftar domain yang tersedia.
-4. Klik salah satu domain, dan bot akan langsung merespons dengan alamat email sementara Anda.
-5. Gunakan email tersebut. Pesan yang masuk akan otomatis diteruskan oleh bot ke chat Anda!
+4. Klik salah satu domain, dan bot akan langsung merespons dengan alamat email sementara kamu.
+5. Gunakan email tersebut. Pesan yang masuk akan otomatis diteruskan oleh bot ke chat kamu!
 
 ---
 
@@ -142,8 +142,8 @@ node bot.js
 ## 🤝 Kontribusi
 Ingin berkontribusi pada proyek ini? Sangat dipersilakan!
 1. Lakukan *Fork* pada repositori ini.
-2. Buat *branch* fitur Anda (`git checkout -b fitur-keren-kamu`).
-3. Lakukan *Commit* perubahan Anda (`git commit -m 'Menambahkan fitur keren'`).
+2. Buat *branch* fitur kamu (`git checkout -b fitur-keren-kamu`).
+3. Lakukan *Commit* perubahan kamu (`git commit -m 'Menambahkan fitur keren'`).
 4. Lakukan *Push* ke branch tersebut (`git push origin fitur-keren-kamu`).
 5. Buka sebuah *Pull Request*.
 

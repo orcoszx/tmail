@@ -1,4 +1,4 @@
 [
-    { "name": "nama-domain", "zone": "zoneId_dari_cloudflare", "status": "ONLINE" },
-    { "name": "nama-domain", "zone": "zoneId_dari_cloudflare", "status": "OFFLINE" }
+    { "name": "domain-kamu.com", "zone": "ISI_ZONE_ID_CLOUDFLARE_1", "status": "ONLINE">
+    { "name": "domain-lain.net", "zone": "ISI_ZONE_ID_CLOUDFLARE_2", "status": "ONLINE">
 ]
