@@ -1,4 +1,3 @@
 [
-    { "name": "domain-kamu.com", "zone": "ISI_ZONE_ID_CLOUDFLARE_1", "status": "ONLINE">
-    { "name": "domain-lain.net", "zone": "ISI_ZONE_ID_CLOUDFLARE_2", "status": "ONLINE">
+    { "name": "troy.web.id", "zone": "6848b19af7d775e151d92cb932c369f2", "status": "ONLINE">
 ]
